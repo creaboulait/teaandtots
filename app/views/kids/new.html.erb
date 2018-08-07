@@ -14,8 +14,6 @@
 	  <%= form.text_field :gender, :autocomplete => "off" %>
 	</div>
 
-	<%= form.hidden_field :user_id, :value => current_user.id %>
-
 	<div class="submit-field">
     <%= form.submit "Add Child", method: :post, :class => "btn btn-block btn-outline-dark" %>
   </div>

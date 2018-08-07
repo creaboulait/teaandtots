@@ -1,3 +1,8 @@
 <% @user = User.find(params[:id]) %>
 <h6>Profile ID #: <%= @user.id %></h6>
 <h5>Welcome, <%= @user.first_name %> <%= @user.last_name %>!</h5>
+
+<!-- Set condition so only user can add kids to own profile -->
+<% if current_user %>
+	<%= link_to "Add Child", new_kid_path, :class => "btn btn-block btn-outline-dark" %>
+<% end %>

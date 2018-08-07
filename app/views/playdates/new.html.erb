@@ -1,0 +1,31 @@
+<%= form_for @playdate do |form| %>
+	<div class="text-field">
+	  <%= form.label :title %>
+	  <%= form.text_field :title, :required => "true", :autocomplete => "off" %>
+	</div>
+
+	<div class="text-field">
+	  <%= form.label :description %>
+	  <%= form.text_field :description, :required => "true", :autocomplete => "off" %>
+	</div>
+
+	<div class="text-field">
+	  <%= form.label :location %>
+	  <%= form.text_field :location, :required => "true", :autocomplete => "off" %>
+	</div>
+
+	<div class="text-field">
+	  <%= form.label :address %>
+	  <%= form.text_field :address, :required => "true", :autocomplete => "off" %>
+	</div>
+
+	<div class="text-field">
+	  <%= form.label :datetime %>
+	  <%= form.datetime_field :datetime, :required => "true", :autocomplete => "off" %>
+	</div>
+
+	<div class="submit-field">
+    <%= form.submit "Sign In", :class => "btn btn-block btn-outline-dark" %>
+  </div>
+<% end %>
+

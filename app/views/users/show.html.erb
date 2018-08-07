@@ -1,11 +1,23 @@
 <h6>Profile ID #: <%= @user.id %></h6>
-<h5>Welcome, <%= @user.first_name %> <%= @user.last_name %>!</h5>
+<h5>Welcome, <%= @user.first_name %> <%= @user.last_name %>!</h5><br/>
 
-<!-- Set condition so only user can add kids to own profile -->
+<!-- Create own playdate -->
 <% if current_user.id == @user.id %>
-	<%= link_to "Add Child", new_kid_path, :class => "btn btn-block btn-outline-dark" %>
+	<%= link_to "Create Playdate", new_playdate_path, :class => "btn btn-block btn-outline-dark" %>
 <% end %>
 <br />
+
+<!-- Display own kids under user profile -->
+<div>
+<h4><%= @user.first_name %>'s Playdates:</h4>
+<% @user.playdates.each do |playdate| %>
+	<li><%= playdate.title %></li>
+	<li><%= playdate.location %></li>
+	<li><%= playdate.address %></li>
+	<li><%= playdate.datetime %></li><br/>
+<% end %>
+</div>
+
 <!-- Display own kids under user profile -->
 <div>
 <h4><%= @user.first_name %>'s Children:</h4>
@@ -15,3 +27,9 @@
 	<li><%= kid.gender %></li><br/>
 <% end %>
 </div>
+
+<!-- Set condition so only user can add kids to own profile -->
+<% if current_user.id == @user.id %>
+	<%= link_to "Add Child", new_kid_path, :class => "btn btn-block btn-outline-dark" %>
+<% end %>
+<br />

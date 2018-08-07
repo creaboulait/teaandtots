@@ -22,7 +22,14 @@
 	<div class="text-field">
 	  <%= form.label :datetime %>
 	  <%= form.datetime_field :datetime, :required => "true", :autocomplete => "off" %>
-	</div>
+	</div><br/>
+
+	<p>Which of your child(ren) are coming along?</p>
+	<% current_user.kids.each do |kid| %>
+		<%= kid.name %> <input type="checkbox" value="<% kid.name %>" ></input>
+		<input type="hidden" value="<% kid.id %>" ></input>
+	<% end %>
+
 
 	<div class="submit-field">
     <%= form.submit "Sign In", :class => "btn btn-block btn-outline-dark" %>

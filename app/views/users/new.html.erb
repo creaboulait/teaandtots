@@ -7,7 +7,7 @@
       <%= render partial: '/users/form', object: form %>
 
       <div class="submit-field">
-        <%= form.submit :class => "sign-up-submit btn btn-outline-dark btn-block my-1" %>
+        <%= form.submit "Sign Up", :class => "sign-up-submit btn btn-outline-dark btn-block my-1" %>
       </div>
       <div>
         <%= link_to "Sign In", sign_in_path, :class => "sign-up-submit btn btn-outline-dark btn-block" %>

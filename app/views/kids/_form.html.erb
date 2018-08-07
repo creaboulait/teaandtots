@@ -1,0 +1,16 @@
+<%= form_for @kid do |form| %>
+	<div class="text-field">
+	  <%= form.label :name_of_child %>
+	  <%= form.text_field :name, :autocomplete => "off" %>
+	</div>
+
+	<div class="text-field">
+	  <%= form.label :age %>
+	  <%= form.text_field :age, :autocomplete => "off" %>
+	</div>
+
+	<div class="text-field">
+	  <%= form.label :gender %>
+	  <%= form.text_field :gender, :autocomplete => "off" %>
+	</div>
+<% end %>

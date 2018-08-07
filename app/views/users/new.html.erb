@@ -1,0 +1,18 @@
+<h2 class="text-center my-2">Sign up!</h2>
+<div class="container-fluid sign-up-background">
+
+  <div class="sign-up container">
+
+    <%= form_for @user do |form| %>
+      <%= render partial: '/users/form', object: form %>
+
+      <div class="submit-field">
+        <%= form.submit :class => "sign-up-submit btn btn-outline-dark btn-block my-1" %>
+      </div>
+      <div>
+        <%= link_to "Sign In", sign_in_path, :class => "sign-up-submit btn btn-outline-dark btn-block" %>
+      </div>
+    <% end %>
+  </div>
+
+</div>

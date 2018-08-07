@@ -6,14 +6,12 @@ class KidsController < ApplicationController
 
 	def create
 		@kid = Kid.new(kid_params)
-		#Hardcoding this at the mo, until I figure out sessions
-		@kid.user_id = 2
 		@kid.save
 		redirect_to user_path(@kid.user_id)
 	end
 
 	private
 	def kid_params
-		params.require(:kid).permit(:name, :age, :gender)
+		params.require(:kid).permit(:name, :age, :gender, :user_id)
 	end
 end

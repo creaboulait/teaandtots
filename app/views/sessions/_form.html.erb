@@ -1,0 +1,15 @@
+<%= form_for :session, url: session_path do |form| %>
+	<div class="text-field">
+	  <%= form.label :email %>
+	  <%= form.text_field :email, type: 'email', :autocomplete => "off" %>
+	</div>
+
+	<div class="password-field">
+	  <%= form.label :password %>
+	  <%= form.password_field :password, :required => "true"%>
+	</div>
+
+	<div class="submit-field">
+    <%= form.submit "Sign In", :class => "btn btn-block btn-outline-dark" %>
+  </div>
+<% end %>

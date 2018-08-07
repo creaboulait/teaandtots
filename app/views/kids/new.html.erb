@@ -1,9 +1,22 @@
-<div class="sign-in">
-  <h2>Add Child</h2>
-  
-  	<%= render partial: '/kids/form' %>
-  	<div class="submit-field">
-        <%= link_to "Submit", root_path, :class => "sign-up-submit btn btn-outline-dark btn-block" %>
-      </div>
+<%= form_for @kid do |form| %>
+	<div class="text-field">
+	  <%= form.label :name_of_child %>
+	  <%= form.text_field :name, :autocomplete => "off" %>
+	</div>
 
-</div>
+	<div class="text-field">
+	  <%= form.label :age %>
+	  <%= form.text_field :age, :autocomplete => "off" %>
+	</div>
+
+	<div class="text-field">
+	  <%= form.label :gender %>
+	  <%= form.text_field :gender, :autocomplete => "off" %>
+	</div>
+
+	<%= form.hidden_field :user_id, :value => current_user.id %>
+
+	<div class="submit-field">
+    <%= form.submit "Add Child", method: :post, :class => "btn btn-block btn-outline-dark" %>
+  </div>
+<% end %>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Teaandtots</title>
+    <title>Tea And Tots</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -41,9 +41,9 @@
                 My Account
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="sign_out">Sign Out</a>
+              <%= link_to "Sign Out", sign_out_path, :class => "dropdown-item", method: :delete %>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Sign In</a>
+              <a class="dropdown-item" href="sign_in">Sign In</a>
                 <a class="dropdown-item" href="#">Sign In With Google</a>
               </div>
             </li>

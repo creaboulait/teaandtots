@@ -1,7 +1,7 @@
 class PlaydatesController < ApplicationController
+	before_action :find_playdate, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@playdates = Playdate.all
 		render 'welcome#index'
 	end
 
@@ -21,8 +21,29 @@ class PlaydatesController < ApplicationController
 		end
 	end
 
+	def show
+
+	end
+
+	def edit
+		# WIP
+	end
+
+	def update
+		# WIP
+	end
+
+	def destroy
+		@playdate.destroy
+		redirect_to user_path(@playdate.user_id)
+	end
+
 	private
 	def playdate_params
 		params.require(:playdate).permit(:title, :description, :location, :address, :datetime)
+	end
+
+	def find_playdate
+		@playdate = Playdate.find(params[:id])
 	end
 end

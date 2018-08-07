@@ -8,15 +8,26 @@
 <br />
 
 <!-- Display own kids under user profile -->
-<div>
-<h4><%= @user.first_name %>'s Playdates:</h4>
-<% @user.playdates.each do |playdate| %>
-	<li><%= playdate.title %></li>
-	<li><%= playdate.location %></li>
-	<li><%= playdate.address %></li>
-	<li><%= playdate.datetime %></li><br/>
-<% end %>
+<div class="container-fluid">
+  <div class="container">
+		<h4 class="text-center">Playdates organized by <%= @user.first_name %>:</h4><br/>
+			<div class="card card-shadow">
+				<div class="card-body text-center">
+					<% @user.playdates.each do |playdate| %>
+						<li>Title: <%= playdate.title %></li>
+						<li>Location: <%= playdate.location %></li>
+						<li>Address: <%= playdate.address %></li>
+						<li>Date & Time:<%= playdate.datetime %></li><br/>
+						<%= link_to 'Edit Playdate', edit_playdate_path(playdate.id), remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
+						<%= link_to 'Delete Playdate', root_path, method: :delete, remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
+
+					<% end %>
+				</div>
+			</div>
+	</div>
 </div>
+
+<!-- Display playdates attending -->
 
 <!-- Display own kids under user profile -->
 <div>

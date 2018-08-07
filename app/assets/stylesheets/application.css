@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
- #founders-story-header {
+#founders-story-header {
     background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url("https://images.pexels.com/photos/160946/people-children-child-happy-160946.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350");
     background-size: cover;
     background-position: center;
@@ -26,4 +26,4 @@
 
 #header-article {
  	margin-top: 60px;
-}
+

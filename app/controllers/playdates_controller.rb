@@ -2,6 +2,7 @@ class PlaydatesController < ApplicationController
 	before_action :find_playdate, only: [:show, :edit, :update, :destroy]
 
 	def index
+
 	end
 
 	def new
@@ -21,9 +22,11 @@ class PlaydatesController < ApplicationController
 	end
 
 	def show
+
 	end
 
 	def edit
+		
 	end
 
 	def update

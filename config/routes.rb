@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
+
   resources :users
-  resource :session, only: [:create]
+  resource :session, only: [:new, :create, :destroy]
   resources :kids, only: [:new, :create]
-  resources :playdates
+  resources :playdates do
+  	resources :reservations
+  end
 
   root 'welcome#index'
-
-  
+ 
   get "/sign_up" => "users#new", as: "sign_up"
   get "/sign_in" => "sessions#new", as: "sign_in"
   post "/sign_in" => "sessions#create"

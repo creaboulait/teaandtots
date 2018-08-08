@@ -2,7 +2,6 @@ class PlaydatesController < ApplicationController
 	before_action :find_playdate, only: [:show, :edit, :update, :destroy]
 
 	def index
-		render 'welcome#index'
 	end
 
 	def new
@@ -22,15 +21,14 @@ class PlaydatesController < ApplicationController
 	end
 
 	def show
-
 	end
 
 	def edit
-		# WIP
 	end
 
 	def update
-		# WIP
+		@playdate.update(playdate_params)
+		redirect_to user_path(@playdate.user_id)
 	end
 
 	def destroy

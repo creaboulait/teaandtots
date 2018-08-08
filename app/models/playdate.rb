@@ -1,5 +1,6 @@
 class Playdate < ApplicationRecord
 	belongs_to :user
+	has_many :participations, dependent: :destroy
 
 	validates :title, presence: true
 	validates :description, presence: true

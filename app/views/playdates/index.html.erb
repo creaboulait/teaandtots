@@ -22,7 +22,7 @@
 								<p class="card-text text-danger">As a security measure, addresses will be shown to playdates participants only.</p>
 							<% end %>
 							<p class="card-text">Date & Time: <%= playdate.datetime %></p>
-							<!-- <p class="card-text">Child(ren) attending: <#%= playdate.participations.kids.count %></p> -->
+							<p class="card-text">Child(ren) attending: <%= playdate.participations.count %></p>
 							<p class="card-text">Organized by: <%= link_to "#{playdate.user.first_name}", user_path(playdate.user_id) %></p>
 							<% if current_user == nil %>
 								<%= link_to 'Join this Playdate!', sign_up_path, :role => "button", :class => "btn btn-block btn-lg btn-outline-dark"  %>

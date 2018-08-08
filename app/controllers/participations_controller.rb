@@ -5,8 +5,12 @@ class ParticipationsController < ApplicationController
 	end
 
 	def create
-		@participation = Participation.create(playdate_id: params[:playdate_id], kid_id: params[:kid][:id])
-		redirect_to user_path(@participation.kid.user_id)
+		
+		@kids = params[:kids] 
+		@kids.each do |kid|
+			Participation.create(playdate_id: params[:playdate_id], kid_id: kid[:id])
+		end
+		redirect_to user_path(current_user.id)
 	end
 
 	def destroy

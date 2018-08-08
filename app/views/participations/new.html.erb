@@ -1,8 +1,8 @@
 <p>Which of your child(ren) are coming along?</p>
 <%= form_for [@playdate, @participation], :url => playdate_participations_path, :html => {:multipart => true} do |form| %>
-	<% current_user.kids.each do |kid| %>
+	<% current_user.kids.distinct.each do |kid| %>
 		<%= form.label "#{kid.name}" %>
-		<input name="kid[name]" type="checkbox" value="<%= kid.name %>" />
+		<input name="kid[][name]" type="checkbox" value="<%= kid.name %>" /><br/>
 		<input name="kid[id]" type="hidden" value="<%= kid.id%>" />
 	<% end %>
 

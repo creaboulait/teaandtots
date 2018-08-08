@@ -20,8 +20,8 @@
 						<% if @user.id == current_user.id || @user.role == "admin" %>
 							<!-- Only make available full address to attendees & admin -->
 							<li>Address: <%= playdate.address %></li>
-							<%= link_to 'Edit Playdate', edit_playdate_path(playdate.id), remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
-							<%= link_to 'Delete Playdate', root_path, method: :delete, remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark", data: { confirm: 'Are you sure you want to delete this playdate?' } %>
+							<%= link_to 'Edit Playdate', edit_playdate_path(playdate.id), :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
+							<%= link_to 'Delete Playdate', playdate_path(playdate.id), method: :delete, remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark", data: { confirm: 'Are you sure you want to delete this playdate?' } %><br/>
 						<% end %>
 					<% end %>
 				</div>

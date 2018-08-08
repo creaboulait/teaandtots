@@ -21,15 +21,14 @@ class PlaydatesController < ApplicationController
 	end
 
 	def show
-
 	end
 
 	def edit
-		# WIP
 	end
 
 	def update
-		# WIP
+		@playdate.update(playdate_params)
+		redirect_to user_path(@playdate.user_id)
 	end
 
 	def destroy

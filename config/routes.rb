@@ -7,13 +7,14 @@ Rails.application.routes.draw do
   	resources :participations
   end
 
-  root 'welcome#index'
+  root "welcome#index"
+  get "welcome/about" => "welcome#about", as: "about" 
  
   get "/sign_up" => "users#new", as: "sign_up"
   get "/sign_in" => "sessions#new", as: "sign_in"
   post "/sign_in" => "sessions#create"
   delete "/sign_out" => "sessions#destroy", as: "sign_out"
 
-  post 'playdates/search' => 'playdates#search', as: "search"
+  post "playdates/search" => "playdates#search", as: "search"
 
 end

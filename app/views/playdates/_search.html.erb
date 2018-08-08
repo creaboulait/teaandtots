@@ -1,28 +1,7 @@
-<h2 class="text-center my-3">Playdates</h2>
-
-<div class="container text-center">
-	<h4>Narrow your search:</h4>
-
-<!-- Filter search bar -->
-    <%= form_with scope: :filter, url: search_path, method: :post, remote: true, class: "card p-1 mb-3" do |f| %>
-      <div class="input-group">
-        <%= f.search_field :playdate, placeholder: "Playdate location", list: "dropdown", class: "form-control" %>
-        <datalist id="dropdown"></datalist>
-        <div class="input-group-append">
-          <%= f.submit "Search", class: "btn btn-warning btn-lg text-dark" %>
-        </div>
-      </div>
-    <% end %>
-</div>
-<!-- Search bar ends -->
-
-<h5 class="text-center">Didn't like anything you see? <%= link_to "Create your own playdate!", new_playdate_path %></h5><br/>
-
-
-<div id ="feed-content" class="container-fluid pt-4">
+<div class="container-fluid pt-4">
 	<div class="container">
 		<div class="row">
-		<% Playdate.all.each do |playdate| %>
+		<% @playdates.each do |playdate| %>
 				<div class="col-md-4 mb-4">
 					<div class="card card-shadow text-center">
 						<div class="card-header bg-light">

@@ -1,5 +1,24 @@
 <h2 class="text-center my-3">Playdates</h2>
-<h5 class="text-center">Didn't like anything you see? <%= link_to "Create your own playdate!", new_playdate_path %></h5>
+<h5 class="text-center">Didn't like anything you see? <%= link_to "Create your own playdate!", new_playdate_path %></h5><br/>
+
+<div class="text-center">
+	<h4>Narrow your search:</h4>
+
+	<%= form_tag(search_path, method: :post) do %>
+	  <p>Location: <%= text_field_tag :playdate_search, params[:playdate_search], list:"locations" %></p>
+	  <datalist id="locations"></datalist>
+
+	  <%= submit_tag 'Filter Results', name: nil, :class => "btn btn-warning btn-lg text-dark" %>
+	<% end %>
+</div>
+
+<br />
+
+<div id="results">
+<!-- :'data-update-target' => 'results' -->
+</div>
+
+
 <div class="container-fluid pt-4">
 	<div class="container">
 		<div class="row">

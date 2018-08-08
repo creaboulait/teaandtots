@@ -5,6 +5,17 @@ class PlaydatesController < ApplicationController
 
 	end
 
+	def search    
+    
+    @playdates = Playdate.where(nil) # creates an anonymous scope
+    @playdates = @playdates.playdate_search(params[:playdate_search]) if params[:playdate_search].present?
+    byebug
+    respond_to do |format|
+      format.html
+      format.json {render json: @playdates}
+    end
+  end
+
 	def new
 		@playdate = Playdate.new
 	end

@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :users
+  resources :users do
+    resources :reviews
+  end
   resource :session, only: [:new, :create, :destroy]
   resources :kids, only: [:new, :create]
   resources :playdates do
-  	resources :participations
+  	resources :participations, only: [:new, :create, :destroy]
   end
 
   root "welcome#index"
@@ -16,5 +18,7 @@ Rails.application.routes.draw do
   delete "/sign_out" => "sessions#destroy", as: "sign_out"
 
   post "playdates/search" => "playdates#search", as: "search"
+
+
 
 end

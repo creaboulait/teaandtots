@@ -2,7 +2,6 @@ class PlaydatesController < ApplicationController
 	before_action :find_playdate, only: [:show, :edit, :update, :destroy]
 
 	def index
-		render 'welcome#index'
 	end
 
 	def new

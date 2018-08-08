@@ -14,13 +14,15 @@
 			<div class="card card-shadow">
 				<div class="card-body text-center">
 					<% @user.playdates.each do |playdate| %>
+						<li>Date & Time:<%= playdate.datetime %></li>
 						<li>Title: <%= playdate.title %></li>
 						<li>Location: <%= playdate.location %></li>
-						<li>Address: <%= playdate.address %></li>
-						<li>Date & Time:<%= playdate.datetime %></li><br/>
-						<%= link_to 'Edit Playdate', edit_playdate_path(playdate.id), remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
-						<%= link_to 'Delete Playdate', root_path, method: :delete, remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
-
+						<% if @user.id == current_user.id || @user.role == "admin" %>
+							<!-- Only make available full address to attendees & admin -->
+							<li>Address: <%= playdate.address %></li>
+							<%= link_to 'Edit Playdate', edit_playdate_path(playdate.id), remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
+							<%= link_to 'Delete Playdate', root_path, method: :delete, remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark", data: { confirm: 'Are you sure you want to delete this playdate?' } %>
+						<% end %>
 					<% end %>
 				</div>
 			</div>

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resources :kids, only: [:new, :create]
   resources :playdates do
-  	resources :reservations
+  	resources :participations
   end
 
   root 'welcome#index'

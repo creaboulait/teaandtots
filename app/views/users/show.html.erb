@@ -27,17 +27,36 @@
 				</div>
 			</div>
 	</div>
-</div>
-
-<!-- Display playdates attending -->
+</div><br/>
 
 <!-- Display own kids under user profile -->
-<div>
-<h4><%= @user.first_name %>'s Children:</h4>
-<% @user.kids.each do |kid| %>
-	<li><%= kid.name %></li>
-	<li><%= kid.age %></li>
-	<li><%= kid.gender %></li><br/>
+<div class="text-center">
+	<h4><%= @user.first_name %>'s Children:</h4>
+	<% @user.kids.each do |kid| %>
+		<li><%= kid.name %></li>
+		<li><%= kid.age %></li>
+		<li><%= kid.gender %></li><br/>
+	<% if @user.id == current_user.id %>
+	<div class="container-fluid">
+	  <div class="container">
+			<h4 class="text-center">Playdates attended by <%= kid.name %>:</h4><br/>
+				<div class="card card-shadow">
+					<div class="card-body text-center">
+						<% kid.participations.each do |playdate| %>
+							<li>Date & Time:<%= Playdate.find(playdate.playdate_id).datetime %></li>
+							<li>Title: <%= Playdate.find(playdate.playdate_id).title %></li>
+							<li>Location: <%= Playdate.find(playdate.playdate_id).location %></li>
+							<% if @user.id == current_user.id || @user.role == "admin" %>
+								<!-- Only make available full address to attendees & admin -->
+								<li>Address: <%= Playdate.find(playdate.playdate_id).address %></li>
+								<%= link_to 'Cancel Attendance', playdate_participation_path(playdate.playdate_id, playdate.id), method: :delete, remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark", data: { confirm: 'Are you sure you want to delete this playdate?' } %><br/>
+							<% end %>
+						<% end %>
+					</div>
+				</div>
+		</div>
+	<% end %>
+	</div>
 <% end %>
 </div>
 

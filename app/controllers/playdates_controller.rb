@@ -2,19 +2,17 @@ class PlaydatesController < ApplicationController
 	before_action :find_playdate, only: [:show, :edit, :update, :destroy]
 
 	def index
-
+		@playdates = Playdate.all
 	end
 
 	def search    
-    
     @playdates = Playdate.where(nil) # creates an anonymous scope
-    @playdates = @playdates.playdate_search(params[:playdate_search]) if params[:playdate_search].present?
-    byebug
+    @playdates = @playdates.playdate_search(filter_params[:playdate]) if filter_params[:playdate].present?
     respond_to do |format|
       format.html
-      format.json {render json: @playdates}
+      format.js
     end
-  end
+   end
 
 	def new
 		@playdate = Playdate.new
@@ -58,4 +56,9 @@ class PlaydatesController < ApplicationController
 	def find_playdate
 		@playdate = Playdate.find(params[:id])
 	end
+
+	def filter_params
+    params.require(:filter).permit(:playdate)
+  end
+
 end

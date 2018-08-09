@@ -1,3 +1,45 @@
-<h6>Playdate ID #: <%= @playdate.id %></h6>
-<h5>Playdate <%= @playdate.title %> is organized by <%= @playdate.user.first_name %></h5><br/>
+<h3 class="text-center my-3">Playdate <%= @playdate.title %> is organized by <%= @playdate.user.first_name %></h3>
+<h4 class="text-center">on <%= @playdate.datetime %></h4>
 
+<div class="container">
+	<h1 class="text-center mt-4 text-shadow">Recent reviews, ordered by latest</h1>
+	<div class="row">
+		<% @playdate.reviews.order(created_at: :desc).each do |review| %>
+		<div class="col-md-4 my-4">
+			<div class="card card-shadow">
+				<div class="card-body">
+					<h5 class="card-title"><span>Title: </span><%= review.title %></h5>
+					<p class="card-text"><span>Description: </span><%= review.description %></p>
+					<p class="card-text">
+					<span>Ratings: 
+					<% if review.stars == 5 %>
+					<div class="star-color">
+						<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+					</div>
+					<% elsif review.stars == 4 %>
+					<div>
+						<i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="fas fa-star grey-star"></i>
+					</div>
+					<% elsif review.stars == 3 %>
+					<div>
+						<i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="fas fa-star grey-star"></i><i class="fas fa-star grey-star"></i>
+					</div>
+					<% elsif review.stars == 2 %>
+					<div>
+						<i class="fas fa-star star-color"></i><i class="fas fa-star star-color"></i><i class="fas fa-star grey-star"></i><i class="fas fa-star grey-star"></i><i class="fas fa-star grey-star"></i>
+					</div>
+					<% elsif review.stars == 1 %>
+					<div>
+						<i class="fas fa-star star-color"></i><i class="fas fa-star grey-star"></i><i class="fas fa-star grey-star"></i><i class="fas fa-star grey-star"></i><i class="fas fa-star grey-star"></i>
+					</div>
+					<% end %>
+					</span></p>
+					<!-- Condition to avoid the original reviewer or the playdate organizer to report the review -->
+					<% if (review.user_id != current_user.id) || @playdate.user_id == current_user.id %>
+						<p id="report_link_<%=review.id%>"><%= link_to 'Report this review', report_path(review), method: :patch, remote: true %></p>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<% end %>
+	</div>

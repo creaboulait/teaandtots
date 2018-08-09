@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :participations, only: [:new, :create, :destroy]
     resources :reviews
   end
+  resources :admins, only: [:index, :destroy]
 
   root "welcome#index"
   get "welcome/about" => "welcome#about", as: "about" 
@@ -18,7 +19,4 @@ Rails.application.routes.draw do
 
   post "playdates/search" => "playdates#search", as: "search"
 
-  # get "playdates/:id/reviews/new" => "reviews#new", as: "new_review"
-  # post "playdates/:id/reviews/new" => "reviews#create"
-    # resources :reviews, only: [:index, :new, :create, :destroy]
 end

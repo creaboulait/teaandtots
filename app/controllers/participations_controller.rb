@@ -5,8 +5,8 @@ class ParticipationsController < ApplicationController
 	end
 
 	def create
-		
-		@kids = params[:kids] 
+
+		@kids = params[:kid] 
 		@kids.each do |kid|
 			Participation.create(playdate_id: params[:playdate_id], kid_id: kid[:id])
 		end

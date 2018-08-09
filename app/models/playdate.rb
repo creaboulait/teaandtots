@@ -1,6 +1,7 @@
 class Playdate < ApplicationRecord
 	belongs_to :user
 	has_many :participations, dependent: :destroy
+	has_many :reviews, dependent: :destroy
 
 	scope :playdate_search, -> (playdate_location) { where("location ILIKE ?", "#{playdate_location}%") }
 

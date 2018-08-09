@@ -13,29 +13,35 @@
       </div>
     </div>
   </div>
-</header>
 
-<div>
-  <%= link_to "See all Playdates", playdates_path, :role => "button", :class => "btn btn-block btn-lg btn-outline-dark" %>
-</div>
 
-<div class="container-fluid content">
-  <div class="content-container">
-    <div data-aos="fade-down" data-aos-duration="3000">
-      <h1 class="text-white">Latest Playdates</h1>
-    </div>
+
+<div class="container-fluid pt-4">
+  <div class="container">
+    <h1 class="text-center text-white">Latest Playdates</h1>
+    <h5 class="text-center text-white">Want to see more? <%= link_to "See all Playdates", playdates_path %></h5><br/>
     <div class="row">
     <% Playdate.all.order(created_at: :desc).limit(3).each do |playdate| %>
-      <div class="card card-shadow text-center">
-        <div class="card-body">
-          <!-- <img src="https://s3-ap-southeast-1.amazonaws.com/pizzahutmy/menu/BlazingSeafood-L-1486726693.png" alt=""> -->
-          <p class="card-text">Playdate: <%= playdate.description %></p>
-          <p class="card-text">Location: <%= playdate.location %></p>
-          <p class="card-text">Organized by: <%= link_to "#{playdate.user.first_name}", user_path(playdate.user_id) %></p>
-          <%= link_to 'I want to attend!', sign_up_path, :role => "button", :class => "btn btn-block btn-lg btn-outline-dark"  %>
+        <div class="col-md-4 mb-4">
+          <div class="card card-shadow text-center">
+            <div class="card-header bg-primary">
+              <h3 class="text-dark"><%= playdate.title %></h3>
+            </div>
+            <div class="card-body">
+              <p class="card-text"><%= playdate.description %> </p>
+              <p class="card-text">Location: <%= playdate.location %></p>
+              <p class="card-text">Date & Time: <%= playdate.datetime %></p>
+              <p class="card-text">Organized by: <%= link_to "#{playdate.user.first_name}", user_path(playdate.user_id) %></p>
+              <% if current_user == nil %>
+                <%= link_to 'Join this Playdate!', sign_up_path, :role => "button", :class => "btn btn-block btn-lg btn-outline-dark"  %>
+              <% else %>
+                <%= link_to 'Join this Playdate!', new_playdate_participation_path(playdate.id), :role => "button", :class => "btn btn-block btn-lg btn-outline-dark"  %>
+              <% end %>
+            </div>
+          </div>
         </div>
-      </div>
     <% end %>
     </div>
   </div>
 </div>
+</header><br/>

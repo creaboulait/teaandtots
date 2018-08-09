@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
 
-  resources :users do
-    resources :reviews
-  end
+  resources :users 
   resource :session, only: [:new, :create, :destroy]
   resources :kids, only: [:new, :create]
   resources :playdates do
-  	resources :participations, only: [:new, :create, :destroy]
+    resources :participations, only: [:new, :create, :destroy]
+    resources :reviews
   end
 
   root "welcome#index"
@@ -19,6 +18,7 @@ Rails.application.routes.draw do
 
   post "playdates/search" => "playdates#search", as: "search"
 
-
-
+  # get "playdates/:id/reviews/new" => "reviews#new", as: "new_review"
+  # post "playdates/:id/reviews/new" => "reviews#create"
+    # resources :reviews, only: [:index, :new, :create, :destroy]
 end

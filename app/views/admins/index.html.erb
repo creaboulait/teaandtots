@@ -13,29 +13,29 @@
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Rating</th>
-			<th scope="col">Review by</th>
+			<th scope="col">Reviewed by</th>
 			<th scope="col">Reported by</th>
 			<th scope="col">Unreport Review</th>
 			<th scope="col">Remove reported review</th>
   	</tr>
 	</thead>
 
-	<!-- <tbody>
-		<#% Review.all.each do |review| %>
-		<#% if review.reported == true %>
+	<tbody>
+		<% Review.all.each do |review| %>
+		<% if review.reported == true %>
 			<tr>
-				<th scope="row"><#%= review.id %></th>
-				<td><#%= review.title %></td>
-				<td><#%= review.description %></td>
-				<td><#%= review.stars %></td>
-				<td><#%= review.user.email %></td>
-				<td><#%= User.find(review.reported_by_user_id).email %></td>
-				<td><#%= link_to 'Unreport review', unreport_path(review.id) %></td>
-				<td><#%= link_to 'Remove reported review', company_review_path(review.company_id, review.id), method: :delete, data:{confirm: "Are you sure?"} %></td>
+				<th scope="row"><%= review.id %></th>
+				<td><%= review.title %></td>
+				<td><%= review.description %></td>
+				<td><%= review.stars %></td>
+				<td><%= review.user.email %></td>
+				<td><%= User.find(review.reported_by_user_id).email %></td>
+				<td><%= link_to 'Unreport review', unreport_path(review.id) %></td>
+				<td><%= link_to 'Remove reported review', company_review_path(review.company_id, review.id), method: :delete, data:{confirm: "Are you sure?"} %></td>
 			</tr>
-		<#% end %>
-		<#% end %>
-	</tbody> -->
+		<% end %>
+		<% end %>
+	</tbody>
 </table>
 </div>
 

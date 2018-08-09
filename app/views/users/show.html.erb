@@ -24,7 +24,9 @@
 <!-- Display own kids under user profile -->
 <div class="container-fluid">
   <div class="container">
-  <h3 class="text-center"><%= link_to "Switch to Admin Page", admins_path, :role => "button", :class => "btn-dark btn-lg" %></h3></br>
+  <% if @user.role == "admin" %>
+  	<h3 class="text-center"><%= link_to "Switch to Admin Page", admins_path, :role => "button", :class => "btn-dark btn-lg" %></h3></br>
+  <% end %>
 		<h4 class="text-center">Playdates organized by <%= @user.first_name %>:</h4><br/>
 			<div class="row">
 				<div class="col-md-4 mb-4">
@@ -73,8 +75,10 @@
 								<!-- Condition that attendance can only be cancelled for future dates -->
 								<% if (Playdate.find(playdate.playdate_id).datetime - Time.now) > 0 %>
 									<%= link_to 'Cancel Attendance', playdate_participation_path(playdate.playdate_id, playdate.id), method: :delete, remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark", data: { confirm: 'Are you sure you want to delete this playdate?' } %>
+								<% elsif (Playdate.find(playdate.playdate_id).datetime - Time.now) < 0 && Playdate.find(playdate.playdate_id).reviews != nil %>
+									<!-- Put elsif here if review already available, show review -->
+									<%= link_to "Show Reviews", playdate_path(playdate),:role => "button", :class => "btn btn-block btn-md btn-outline-dark" %> 
 								<% else %>
-								<!-- Put elsif here if review already available, show review -->
 									<%= link_to 'Review Playdate', new_playdate_review_path(playdate), :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
 								<% end %>
 							<% end %>

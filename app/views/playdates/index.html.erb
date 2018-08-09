@@ -22,32 +22,35 @@
 <div id ="feed-content" class="container-fluid pt-4">
 	<div class="container">
 		<div class="row">
-		<% Playdate.all.each do |playdate| %>
-				<div class="col-md-4 mb-4">
-					<div class="card card-shadow text-center">
-						<div class="card-header bg-light">
-							<h3><%= playdate.title %></h3>
+			<!-- Set condition that playdates before current time are hidden from view -->
+			<% Playdate.all.each do |playdate| %>
+				<% if (playdate.datetime - Time.now) > 0 %>
+						<div class="col-md-4 mb-4">
+							<div class="card card-shadow text-center">
+								<div class="card-header bg-light">
+									<h3><%= playdate.title %></h3>
+								</div>
+								<div class="card-body">
+									<p class="card-text"><%= playdate.description %> </p>
+									<p class="card-text">Location: <%= playdate.location %></p>
+									<% if playdate.user_id == current_user.id || current_user.role == "admin" %>
+										<p class="card-text">Address: <%= playdate.address %></p>
+									<% else %>
+										<p class="card-text text-danger">As a security measure, addresses will be shown to playdates participants only.</p>
+									<% end %>
+									<p class="card-text">Date & Time: <%= playdate.datetime %></p>
+									<p class="card-text">Child(ren) attending: <%= playdate.participations.count %></p>
+									<p class="card-text">Organized by: <%= link_to "#{playdate.user.first_name}", user_path(playdate.user_id) %></p>
+									<% if current_user == nil %>
+										<%= link_to 'Join this Playdate!', sign_up_path, :role => "button", :class => "btn btn-block btn-lg btn-outline-dark"  %>
+									<% else %>
+										<%= link_to 'Join this Playdate!', new_playdate_participation_path(playdate.id), :role => "button", :class => "btn btn-block btn-lg btn-outline-dark"  %>
+									<% end %>
+								</div>
+							</div>
 						</div>
-						<div class="card-body">
-							<p class="card-text"><%= playdate.description %> </p>
-							<p class="card-text">Location: <%= playdate.location %></p>
-							<% if playdate.user_id == current_user.id || current_user.role == "admin" %>
-								<p class="card-text">Address: <%= playdate.address %></p>
-							<% else %>
-								<p class="card-text text-danger">As a security measure, addresses will be shown to playdates participants only.</p>
-							<% end %>
-							<p class="card-text">Date & Time: <%= playdate.datetime %></p>
-							<p class="card-text">Child(ren) attending: <%= playdate.participations.count %></p>
-							<p class="card-text">Organized by: <%= link_to "#{playdate.user.first_name}", user_path(playdate.user_id) %></p>
-							<% if current_user == nil %>
-								<%= link_to 'Join this Playdate!', sign_up_path, :role => "button", :class => "btn btn-block btn-lg btn-outline-dark"  %>
-							<% else %>
-								<%= link_to 'Join this Playdate!', new_playdate_participation_path(playdate.id), :role => "button", :class => "btn btn-block btn-lg btn-outline-dark"  %>
-							<% end %>
-						</div>
-					</div>
-				</div>
 				<% end %>
+			<% end %>
 		</div>
 	</div>
 </div>

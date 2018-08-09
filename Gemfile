@@ -27,8 +27,17 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.12'
 
-# Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+# To manage storage of sensitive keys
+gem 'figaro'
+
+# To upload & manage images
+gem 'mini_magick'
+gem 'carrierwave'
+
+# To utilise AWS cloud storage
+gem 'fog-aws'
+gem 'aws-sdk-rails'
+gem 'carrierwave-aws'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

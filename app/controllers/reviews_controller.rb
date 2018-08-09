@@ -23,6 +23,18 @@ class ReviewsController < ApplicationController
 		end
 	end
 
+	#This is confined to admin only
+	def destroy
+		# # Assign free spin to user who reported toxic review
+		# user = User.find(@review.reported_by_user_id)
+		# user.update(spins_remaining: user.spins_remaining += 1)
+
+		# Happens after free spin given
+		@review = Review.find(params[:id])
+		@review.destroy
+		redirect_to admins_path
+	end
+
 	private
 	def review_params
 		params.require(:review).permit(:title, :description, :stars)

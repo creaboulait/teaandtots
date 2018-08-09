@@ -1,0 +1,75 @@
+<div class="container-fluid mb-4">
+  <div style="width: 80vw; margin: auto;">
+    
+    <h1 class="my-5">Meet other Parents</h1>
+    
+    <%# row %>
+     <% @user.each_with_index do |user, index| %> 
+      <%# logic to show more than 10 for pagination %>
+      <!-- <#% if params[:page].nil? %> -->
+        <!-- <#% temp = 1 %> -->
+      <!-- <#% else %> -->
+        <!-- <#% temp = params[:page].to_i %> -->
+      <!-- <#% end %> -->
+      <!-- <#% multiple = (temp - 1) * 10 %> -->
+      <!-- <#% show = index + 1 + multiple %> -->
+      <%# end %>
+
+      <div class="row mt-4 mb-0">
+
+        <!-- List all users & their bios -->
+        <div class="col-md-4 mb-3 d-flex justify-content-center">
+          <div style="position: relative;">
+            <% if !user.profilepic.file.nil? %>
+              <%= image_tag user.profilepic.url.to_s, class: "rounded-circle img-fluid d-blockd" %>
+            <% else %>
+              <%= image_tag "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvZ1oCnNqX6oaOklVlfeouKBK2DdGCA_wBdu6psjAlAcM-I-1e", class: "rounded-circle img-fluid d-block" %>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- User details & bio -->
+        <div class="col-md-4 mb-3">
+          <h3>Name: <%= user.first_name %><%= user.last_name %></h3>
+          <p>Contact: <%= user.email %></p>
+          <p>About me: <%= user.bio %></p>
+          <%= button_to "View Profile", user_path(user.id), method: :get, class:"btn btn-primary" %>
+        </div>
+        <!-- End -->
+
+        <!-- Kids profile -->
+        <div class="col-md-4">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col"><%= user.first_name %>'s Child(ren)</th>
+                <th scope="col">Age</th>
+                <th scope="col">Gender</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% user.kids.each_with_index do |kid, index| %>
+                <% if index < 3 %>
+                  <tr>
+                    <td scope="row"><%= index + 1%></td>
+                    <td><%= kid.name %></td>
+                    <td><%= kid.age %></td>
+                    <td><%= kid.gender %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <!-- End -->
+        
+      </div>
+    <% end %>
+    
+  </div>
+</div>
+
+<%# pagination %>
+<!-- <#%= will_paginate @leaderboard, list_classes: %w(pagination justify-content-center mt-3) %> -->
+<%# end %>

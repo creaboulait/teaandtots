@@ -45,4 +45,8 @@
 		<% end %>
 	</div><br/>
 
+<!-- Condition to allow user to review playdates only once & not the ones they hosted -->
+<% if @playdate.reviews.find_by(user_id: current_user.id) == nil && @playdate.user_id != current_user.id %>
+	<%= link_to 'Review Playdate', new_playdate_review_path(@playdate), :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
+<% end %>
 	<%= link_to 'Back', user_path(current_user.id), :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>

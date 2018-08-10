@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :find_user, only: [:show, :edit, :update]
+	before_action :find_user, only: [:show, :edit, :update, :report, :unreport, :destroy]
 
 	def index
 		@user = User.all
@@ -25,6 +25,33 @@ class UsersController < ApplicationController
 	def update
 		@user.update(user_params)
 		redirect_to user_path(@user)
+	end
+
+	def report
+		if @user.reported == false
+			flash.now[:notice] = "Thank you for reporting this user. The admin will be in touch with you shortly to understand your concerns."
+			respond_to do |format|
+				format.js
+			end
+			@user.update(reported: true, reported_by_user_id: current_user.id)
+		elsif @user.reported == true
+			flash.now[:alert] = "This user is currently under investigation by our admin." 
+			respond_to do |format|
+				format.js
+			end
+		end		
+	end
+
+	#This is confined to admin only & button available on admin panel
+	def unreport
+		@user.update(reported: false, reported_by_user_id: nil)
+		redirect_to admins_path
+	end
+
+	#This is confined to admin only & button available on admin panel
+	def destroy
+		@user.delete
+		redirect_to admins_path
 	end
 
 	private

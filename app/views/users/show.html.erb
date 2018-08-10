@@ -16,22 +16,29 @@
 					<%= link_to "Edit Profile", edit_user_path(@user), method: :get %><br/>
 					<%= link_to "Add Child", new_kid_path %><br/>
 					<%= link_to "Create Playdate", new_playdate_path %><br/>
+				<% else %>
+					<%= link_to "View all Playdates", playdates_path %><br/>	
 				<% end %>
-				<%= link_to "View all Playdates", playdates_path %><br/>
+
+				<!-- Condition to avoid the user reporting him/herself -->
+				<% if @user.id != current_user.id || @user.role == "admin" %>
+					<p id="report_link_<%=@user.id%>" ><%= link_to "Report User", report_path(@user), method: :patch, remote: true %></p><br/>	
+				<% end %>
+
 			</div>
-		</div>
+	</div>
 
 <!-- Display own kids under user profile -->
 <div class="container-fluid pt-4">
 	<div class="container">
 		<% if @user.role == "admin" %>
-			<p class="text-center"><%= link_to "Switch to Admins Page", playdates_path, :role => "button", :class => "btn-dark btn-lg" %><p></br>
+			<p class="text-center"><%= link_to "Switch to Admins Page", admins_path, :role => "button", :class => "btn-dark btn-lg" %><p></br>
 		<% end %>
 		<h4 class="text-center">Playdates organized by <%= @user.first_name %>:</h4><br/>
 
 		<div class="row">
 				
-			<% current_user.playdates.order(datetime: :desc).each do |playdate| %>
+			<% @user.playdates.order(datetime: :desc).each do |playdate| %>
 						<div class="col-md-4 mb-4">
 							<div class="card card-shadow text-center">
 								<div class="card-header bg-light">
@@ -70,8 +77,6 @@
 		</div>
 	</div>
 </div>
-
-
 
 <!-- Display own kids under user profile. This will be hidden from other users. -->
 <% if @user.id == current_user.id || @user.role == "admin" %>

@@ -27,7 +27,7 @@
 			</div>
 
 			<%= form.submit :class => "sign-up-submit btn btn-outline-dark btn-block mt-3" %>
-		  <%= link_to "Back", user_path(@user), :role => "button", :class => "btn btn-outline-dark btn-block" %>
+		  <%= link_to "Back", user_path(current_user.id), :role => "button", :class => "btn btn-outline-dark btn-block" %>
 		<% end %>
 	</div>
 </div>

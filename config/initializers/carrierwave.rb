@@ -5,9 +5,9 @@ CarrierWave.configure do |config|
     aws_access_key_id:     ENV['AWS_ACCESS_KEY_ID'],                        
     aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],                        
     use_iam_profile:       false,                         # optional, defaults to false
-    region:                'ap-southeast-1',                  # optional, defaults to 'us-east-1'
+    region:                ENV['AWS_REGION'],                  # optional, defaults to 'us-east-1'
   }
-  config.fog_directory  = 'airbnb-next'                                      
+  config.fog_directory  = ENV['S3_BUCKET_NAME']                                      
   config.fog_public     = false                                                # optional, defaults to true
   config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" } # optional, defaults to {}
 end

@@ -10,6 +10,7 @@
 				<div class="card-body">
 					<h5 class="card-title"><span>Title: </span><%= review.title %></h5>
 					<p class="card-text"><span>Description: </span><%= review.description %></p>
+					<p class="card-text"><span>Review by: </span><%= review.user.email %></p>
 					<p class="card-text">
 					<span>Ratings: 
 					<% if review.stars == 5 %>

@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
-	before_action :find_user, only: [:create, :destroy] 
+	before_action :find_user, only: [:create] 
+	before_action :find_review, only: [:report, :unreport, :destroy]
 
 	def index
 		@reviews = Review.find_by(user_id: params[:id])
@@ -46,12 +47,6 @@ class ReviewsController < ApplicationController
 
 	#This is confined to admin only
 	def destroy
-		# # Assign free spin to user who reported toxic review
-		# user = User.find(@review.reported_by_user_id)
-		# user.update(spins_remaining: user.spins_remaining += 1)
-
-		# Happens after free spin given
-		@review = Review.find(params[:id])
 		@review.destroy
 		redirect_to admins_path
 	end
@@ -63,5 +58,9 @@ class ReviewsController < ApplicationController
 
 	def find_user
 		@user = User.find(current_user.id)
+	end
+
+	def find_review
+		@review = Review.find(params[:id])
 	end
 end

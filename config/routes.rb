@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   root "welcome#index"
   get "welcome/about" => "welcome#about", as: "about" 
+  get "welcome/test" => "welcome#test"
  
   get "/sign_up" => "users#new", as: "sign_up"
   get "/sign_in" => "sessions#new", as: "sign_in"

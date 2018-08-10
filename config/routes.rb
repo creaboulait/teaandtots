@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :forecasts, only: [:new, :create]
   resources :users 
   resource :session, only: [:new, :create, :destroy]
   resources :kids, only: [:new, :create]
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
 
   post "playdates/search" => "playdates#search", as: "search"
 
-  # patch "reviews/:id/report" => "reviews#report", as: "report"
-  # get "reviews/:id/unreport" => "reviews#unreport", as: "unreport"
+  patch "reviews/:id/report" => "reviews#report", as: "report"
+  get "reviews/:id/unreport" => "reviews#unreport", as: "unreport"
 
 end

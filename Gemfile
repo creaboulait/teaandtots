@@ -39,6 +39,9 @@ gem 'fog-aws'
 gem 'aws-sdk-rails'
 gem 'carrierwave-aws'
 
+# To integrate Dark Sky weather forecast 
+gem 'forecast_io'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

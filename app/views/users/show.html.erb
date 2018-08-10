@@ -1,7 +1,7 @@
 	<div class="d-flex justify-content-around mt-2">
 			<div class="img col-sm-4">
 				<% if @user.profilepic? %>
-					<%= image_tag @user.profilepic_url.to_s, class: "rounded-circle img-fluid d-blockd" %> 
+					<%= image_tag @user.profilepic_url.to_s, class: "rounded-circle img-fluid d-block" %> 
 				<% else %>
 					<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvZ1oCnNqX6oaOklVlfeouKBK2DdGCA_wBdu6psjAlAcM-I-1e" class: "rounded-circle img-fluid d-block"> 
 				<% end %>
@@ -10,7 +10,8 @@
 			<div class="col-sm-8 p-3 text-shadow text-right">
 				<h1><%= @user.first_name %> <%= @user.last_name %></h1>
 				<h5><%= @user.email %></h5>
-				<h5><%= @user.bio %></h5></br>
+				<h5><%= @user.bio %></h5>
+				<h5>It's a good day for playdates as temperature is..</h5></br>
 
 				<% if logged_in? && @user.id == current_user.id %>
 					<%= link_to "Edit Profile", edit_user_path(@user), method: :get %><br/>

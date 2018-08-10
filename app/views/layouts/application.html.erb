@@ -2,8 +2,6 @@
 <html lang="en">
   <head>
     <title>Tea And Tots</title>
-    <!-- Link to Bootstrap css -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"> -->
 
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.2/minty/bootstrap.min.css" rel="stylesheet" integrity="sha384-ZCyhLHmqgPJ/qW/xn+zQu7JrywSUOgV7SkjrnkGDss+6/qs+4SPDrS6qq4IOG0N9" crossorigin="anonymous">
 
@@ -56,6 +54,11 @@
         </div>
     </nav>
     <!-- End of Navbar -->
+  <div>
+    <% if Forecast.count != nil %>
+      <h4>Today's weather forecast: <%= Forecast.first.get_weather_data.currently.summary %>, with temperature <%= Forecast.first.get_weather_data.currently.temperature %>&deg;F</h4><br/>
+    <% end %>
+  </div>
 
   <!-- Start of Flash Message -->
   <div class="container-fluid bg-win">

@@ -3,3 +3,10 @@
 <div class= "text-center">
   <h5>Admit it, that's why you're here too!</h5>
 </div>
+
+<div>
+	<% if Forecast.count != nil %>
+	  <h4>Today's weather forecast: <%= Forecast.first.get_weather_data.currently.summary %>, with temperature <%= Forecast.first.get_weather_data.currently.temperature %>&deg;F</h4><br/>
+	<% end %>
+</div>
+

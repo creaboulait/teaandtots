@@ -54,11 +54,6 @@
         </div>
     </nav>
     <!-- End of Navbar -->
-  <div>
-    <% if Forecast.count != nil %>
-      <h4>Today's weather forecast: <%= Forecast.first.get_weather_data.currently.summary %>, with temperature <%= Forecast.first.get_weather_data.currently.temperature %>&deg;F</h4><br/>
-    <% end %>
-  </div>
 
   <!-- Start of Flash Message -->
   <div class="container-fluid bg-win">

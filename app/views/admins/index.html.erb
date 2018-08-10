@@ -2,7 +2,10 @@
 
 <h2 class="py-3">Admin Panel</h2>
 
-<p><%= link_to "Switch to Playdates Page", playdates_path, :role => "button", :class => "btn-dark btn-lg" %></p></br>
+<p><%= link_to "Switch to Playdates Page", playdates_path, :role => "button", :class => "btn-dark btn-lg" %></p>
+<% if Forecast.count == nil %>
+	<p><%= link_to "Set Weather Forecast Location for App", new_forecast_path, :role => "button", :class => "btn-dark btn-lg" %></p></br>
+<% end %>
 
 <h3>Reported reviews</h3>
 

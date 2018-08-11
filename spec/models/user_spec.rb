@@ -61,4 +61,12 @@ RSpec.describe User, type: :model do
 
 	end
 
+	context 'test report! model method' do
+		it "should change the column reported value from default false to true " do
+			user = User.create(email: proper_email, password: proper_password)
+			user.report!
+			expect(user.reported).to eq(true)
+		end
+	end
+
 end

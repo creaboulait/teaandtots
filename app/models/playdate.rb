@@ -10,5 +10,6 @@ class Playdate < ApplicationRecord
 	validates :location, presence: true
 	validates :address, presence: true
 	validates :datetime, presence: true
+	
 end
 

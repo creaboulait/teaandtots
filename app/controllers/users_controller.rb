@@ -27,13 +27,15 @@ class UsersController < ApplicationController
 		redirect_to user_path(@user)
 	end
 
+
 	def report
 		if @user.reported == false
+			@user.report!
 			flash.now[:notice] = "Thank you for reporting this user. The admin will be in touch with you shortly to understand your concerns."
 			respond_to do |format|
 				format.js
 			end
-			@user.update(reported: true, reported_by_user_id: current_user.id)
+			@user.update(reported_by_user_id: current_user.id)
 		elsif @user.reported == true
 			flash.now[:alert] = "This user is currently under investigation by our admin." 
 			respond_to do |format|

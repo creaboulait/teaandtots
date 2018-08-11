@@ -54,6 +54,12 @@
 									<% end %>
 									<p class="card-text">Date & Time: <%= playdate.datetime %></p>
 									<p class="card-text">Child(ren) attending: <%= playdate.participations.count %></p>
+									<% if playdate.reviews.average(:stars) == 0 || playdate.reviews.average(:stars) == nil %>
+										<p class="card-text">Playdate average rating: 0</p>
+									<% else %>
+										<p class="card-text">Playdate average rating: <%= '%.2f' % playdate.reviews.average(:stars) %></p>
+									<% end %>
+									
 									
 									<!-- If user owns playdate & playdate in the future, allow to edit or delete -->
 									<% if @user.id == current_user.id && (playdate.datetime - Time.now) > 0 %>

@@ -3,18 +3,8 @@
     
     <h1 class="my-5">Meet other Parents</h1>
     
-    <%# row %>
      <% @user.each_with_index do |user, index| %> 
-      <%# logic to show more than 10 for pagination %>
-      <!-- <#% if params[:page].nil? %> -->
-        <!-- <#% temp = 1 %> -->
-      <!-- <#% else %> -->
-        <!-- <#% temp = params[:page].to_i %> -->
-      <!-- <#% end %> -->
-      <!-- <#% multiple = (temp - 1) * 10 %> -->
-      <!-- <#% show = index + 1 + multiple %> -->
-      <%# end %>
-
+      
       <div class="row mt-4 mb-0">
 
         <!-- List all users & their bios -->
@@ -33,7 +23,9 @@
           <h3>Name: <%= user.first_name %><%= user.last_name %></h3>
           <p>Contact: <%= user.email %></p>
           <p>About me: <%= user.bio %></p>
-          <%= button_to "View Profile", user_path(user.id), method: :get, class:"btn btn-primary" %>
+          <% if logged_in? %>
+            <%= button_to "View Profile", user_path(user.id), method: :get, class:"btn btn-primary" %>
+          <% end %>
         </div>
         <!-- End -->
 
@@ -70,6 +62,3 @@
   </div>
 </div>
 
-<%# pagination %>
-<!-- <#%= will_paginate @leaderboard, list_classes: %w(pagination justify-content-center mt-3) %> -->
-<%# end %>

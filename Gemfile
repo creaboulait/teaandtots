@@ -42,6 +42,9 @@ gem 'carrierwave-aws'
 # To integrate Dark Sky weather forecast 
 gem 'forecast_io'
 
+# To test using rspec
+gem 'rspec-rails', '~> 3.8'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   post "playdates/search" => "playdates#search", as: "search"
 
-  patch "reviews/:id/report" => "reviews#report", as: "report"
-  get "reviews/:id/unreport" => "reviews#unreport", as: "unreport"
+  patch "users/:id/report" => "users#report", as: "report"
+  get "users/:id/unreport" => "users#unreport", as: "unreport"
 
 end

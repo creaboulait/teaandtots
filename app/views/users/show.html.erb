@@ -17,90 +17,103 @@
 					<%= link_to "Add Child", new_kid_path %><br/>
 					<%= link_to "Create Playdate", new_playdate_path %><br/>
 				<% end %>
-				<%= link_to "View all Playdates", playdates_path %><br/>
+					<%= link_to "View all Playdates", playdates_path %><br/>	
+
+				<!-- Condition to avoid the user reporting him/herself -->
+				<% if @user.id != current_user.id || @user.role == "admin" %>
+					<p id="report_link_<%=@user.id%>" ><%= link_to "Report User", report_path(@user), method: :patch, remote: true %></p><br/>	
+				<% end %>
+
 			</div>
-		</div>
+	</div>
 
 <!-- Display own kids under user profile -->
 <div class="container-fluid pt-4">
 	<div class="container">
-	 <% if @user.role == "admin" %>
-			<p class="text-center"><%= link_to "Switch to Admins Page", playdates_path, :role => "button", :class => "btn-dark btn-lg" %><p></br>
+		<% if @user.role == "admin" %>
+			<p class="text-center"><%= link_to "Switch to Admins Page", admins_path, :role => "button", :class => "btn-dark btn-lg" %><p></br>
 		<% end %>
 		<h4 class="text-center">Playdates organized by <%= @user.first_name %>:</h4><br/>
+
 		<div class="row">
-			<div class="col-md-4 mb-4">
-				<div class="card card-shadow text-center">
-					<% @user.playdates.order(datetime: :desc).each do |playdate| %>
-					<div class="card-header bg-light">
-						<h3><%= playdate.title %></h3>
-					</div>
-					<div class="card-body">
-						<p class="card-text"><%= playdate.description %> </p>
-						<p class="card-text">Location: <%= playdate.location %></p>
+				
+			<% @user.playdates.order(datetime: :desc).each do |playdate| %>
+						<div class="col-md-4 mb-4">
+							<div class="card card-shadow text-center">
+								<div class="card-header bg-secondary text-dark">
+									<h3><%= playdate.title %></h3>
+								</div>
+								<div class="card-body">
+									<p class="card-text"><%= playdate.description %> </p>
+									<p class="card-text">Location: <%= playdate.location %></p>
 
-						<% if playdate.user_id == current_user.id || current_user.role == "admin" %>
-							<p class="card-text">Address: <%= playdate.address %></p>
-						<% else %>
-							<p class="card-text text-danger">As a security measure, addresses will be shown to playdates participants only.</p>
-						<% end %>
+									<% if playdate.user_id == current_user.id || current_user.role == "admin" %>
+										<p class="card-text">Address: <%= playdate.address %></p>
+									<% else %>
+										<p class="card-text text-danger">As a security measure, addresses will be shown to playdates participants only.</p>
+									<% end %>
+									<p class="card-text">Date & Time: <%= playdate.datetime %></p>
+									<p class="card-text">Child(ren) attending: <%= playdate.participations.count %></p>
+									
+									<!-- If user owns playdate & playdate in the future, allow to edit or delete -->
+									<% if @user.id == current_user.id && (playdate.datetime - Time.now) > 0 %>
+										<%= link_to 'Edit Playdate', edit_playdate_path(playdate.id), :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
+										<%= link_to 'Delete Playdate', playdate_path(playdate.id), method: :delete, remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark", data: { confirm: 'Are you sure you want to delete this playdate?' } %>
+										<!-- If user doesn't own playdate & playdate in the future, allow to join -->
+									<% elsif @user.id != current_user.id && (playdate.datetime - Time.now) > 0 %>
+											<%= link_to 'Join Playdate', new_playdate_participation_path(playdate.id), :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
+										<!-- If playdate has passed -->
+									<% elsif (playdate.datetime - Time.now) < 0 %>
+										<%= link_to 'Show Reviews', playdate_path(playdate.id), :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
+									<% end %>
 
-						<p class="card-text">Date & Time: <%= playdate.datetime %></p>
-						<p class="card-text">Child(ren) attending: <%= playdate.participations.count %></p>
-							<!-- If user owns playdate & playdate in the future, allow to edit or delete -->
-							<% if @user.id == current_user.id && (playdate.datetime - Time.now) > 0 %>
-								<%= link_to 'Edit Playdate', edit_playdate_path(playdate.id), :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
-								<%= link_to 'Delete Playdate', playdate_path(playdate.id), method: :delete, remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark", data: { confirm: 'Are you sure you want to delete this playdate?' } %>
-								<!-- If user doesn't own playdate & playdate in the future, allow to join -->
-							<% elsif @user.id != current_user.id && (playdate.datetime - Time.now) > 0 %>
-									<%= link_to 'Join Playdate', new_playdate_participation_path(playdate.id), :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
-								<!-- If playdate has passed -->
-							<% elsif (playdate.datetime - Time.now) < 0 %>
-								<%= link_to 'Show Reviews', playdate_path(playdate.id), :role => "button", :class => "btn btn-block btn-md btn-outline-dark" %>
-							<% end %>
-					</div>
-				</div>
-			</div>
+								</div>
+							</div>
+						</div>
+
+			<% end %>
+
 		</div>
 	</div>
-	<% end %>
-</div>
-
+</div><hr/>
 
 <!-- Display own kids under user profile. This will be hidden from other users. -->
 <% if @user.id == current_user.id || @user.role == "admin" %>
-	<div class="text-center">
-		<h4><%= @user.first_name %>'s Children:</h4>
-		<% @user.kids.each do |kid| %>
-			<li><%= kid.name %></li>
-			<li><%= kid.age %></li>
-			<li><%= kid.gender %></li><br/>
-		<div class="container-fluid">
-		  <div class="container">
-				<h4 class="text-center">Playdates attended by <%= kid.name %>:</h4><br/>
-					<div class="card card-shadow">
-						<div class="card-body text-center">
-							<% kid.participations.each do |playdate| %>
-								<li>Date & Time:<%= Playdate.find(playdate.playdate_id).datetime %></li>
-								<li>Title: <%= Playdate.find(playdate.playdate_id).title %></li>
-								<li>Location: <%= Playdate.find(playdate.playdate_id).location %></li>
-								<% if @user.id == current_user.id || @user.role == "admin" %>
-									<!-- Only make available full address to attendees & admin -->
-									<li>Address: <%= Playdate.find(playdate.playdate_id).address %></li>
-									<!-- Condition that attendance can only be cancelled for future dates -->
+	<% @user.kids.each do |kid| %>
+<div class="container-fluid pt-4">
+	<div class="container">
+		<h4 class="text-center">Playdates attended by <%= kid.name %>:</h4><br/>
+		<div class="row">
+				
+			<% kid.participations.each do |playdate| %>
+						<div class="col-md-4 mb-4">
+							<div class="card card-shadow text-center">
+								<div class="card-header bg-warning">
+									<h3><%= Playdate.find(playdate.playdate_id).title %></h3>
+								</div>
+								<div class="card-body">
+									<p class="card-text"><%= Playdate.find(playdate.playdate_id).description %> </p>
+									<p class="card-text">Location: <%= Playdate.find(playdate.playdate_id).location %></p>
+									<p class="card-text">Address: <%= Playdate.find(playdate.playdate_id).address %></p>
+									<p class="card-text">Date & Time: <%= Playdate.find(playdate.playdate_id).datetime %></p>
+									<p class="card-text">Child(ren) attending: <%= Playdate.find(playdate.playdate_id).participations.count %></p>
+									
 									<% if (Playdate.find(playdate.playdate_id).datetime - Time.now) > 0 %>
 										<%= link_to 'Cancel Attendance', playdate_participation_path(playdate.playdate_id, playdate.id), method: :delete, remote: true, :role => "button", :class => "btn btn-block btn-md btn-outline-dark", data: { confirm: 'Are you sure you want to delete this playdate?' } %>
 									<% else %>
 										<%= link_to "Show Reviews", playdate_path(Playdate.find(playdate.playdate_id)),:role => "button", :class => "btn btn-block btn-md btn-outline-dark" %> 
 									<% end %>
-								<% end %>
-							<% end %>
+
+								</div>
+							</div>
 						</div>
-					</div>
-			</div>
+
+			<% end %>
+
 		</div>
-	<% end %>
 	</div>
+</div>
+	<% end %>
 <% end %>
 
 

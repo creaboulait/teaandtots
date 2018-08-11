@@ -24,27 +24,6 @@ class ReviewsController < ApplicationController
 		end
 	end
 
-	def report
-		if @review.reported == false
-			flash.now[:notice] = "Thank you for reporting this review."
-			respond_to do |format|
-				format.js
-			end
-			@review.update(reported: true, reported_by_user_id: current_user.id )
-		elsif @review.reported == true
-			flash.now[:alert] = "This review is currently under investigation by our admins and shall be removed if deemed inappropriate." 
-			respond_to do |format|
-				format.js
-			end
-		end		
-	end
-
-	#This is confined to admin only & button available on admin panel
-	def unreport
-		@review.update(reported: false, reported_by_user_id: nil)
-		redirect_to admins_path
-	end
-
 	#This is confined to admin only
 	def destroy
 		@review.destroy

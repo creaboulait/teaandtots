@@ -17,6 +17,10 @@ RSpec.describe User, type: :model do
 		it { is_expected.to allow_value(proper_password).for(:password) }	
 	end
 
+	context 'enumurate role' do
+		it { should define_enum_for(:role).with([:user, :admin]) }
+	end
+
 	context 'associations' do
 		# Test user-kids association & dependency
 		it "should not belong to kids" do 

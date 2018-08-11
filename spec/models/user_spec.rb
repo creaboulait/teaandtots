@@ -17,6 +17,10 @@ RSpec.describe User, type: :model do
 		it { is_expected.to allow_value(proper_password).for(:password) }	
 	end
 
+	context 'enumurate role' do
+		it { should define_enum_for(:role).with([:user, :admin]) }
+	end
+
 	context 'associations' do
 		# Test user-kids association & dependency
 		it "should not belong to kids" do 
@@ -55,6 +59,14 @@ RSpec.describe User, type: :model do
 			expect { user.destroy }.to change { Playdate.count }.by(-2)
 		end
 
+	end
+
+	context 'test report! model method' do
+		it "should change the column reported value from default false to true " do
+			user = User.create(email: proper_email, password: proper_password)
+			user.report!
+			expect(user.reported).to eq(true)
+		end
 	end
 
 end

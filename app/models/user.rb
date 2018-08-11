@@ -14,4 +14,9 @@ class User < ApplicationRecord
 						on: :create,
            	presence: true,
            	length: { minimum: 8 }
+
+  def report!
+  		update_attribute(:reported, true)
+ 	end
+
 end

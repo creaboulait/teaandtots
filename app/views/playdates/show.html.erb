@@ -35,10 +35,6 @@
 					</div>
 					<% end %>
 					</span></p>
-					<!-- Condition to avoid the original reviewer or the playdate organizer to report the review -->
-					<% if (review.user_id != current_user.id) || @playdate.user_id == current_user.id %>
-						<p id="report_link_<%=review.id%>"><%= link_to 'Report this review', report_path(review), method: :patch, remote: true %></p>
-					<% end %>
 				</div>
 			</div>
 		</div>

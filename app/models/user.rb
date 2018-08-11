@@ -7,11 +7,11 @@ class User < ApplicationRecord
 
 	mount_uploader :profilepic, ProfilepicUploader
 
-	validates :email, presence: { message: "Email must not be blank."},
-						uniqueness: { message: "Email has already been used to register account."},
+	validates :email, presence: true,
+						uniqueness: true,
 	          format: { with: /\w+@\w+\.\w{2,}/, message: "Email must be in format abc@example.com"} 
 	validates :password,
 						on: :create,
-           	presence: { message: "Password must not be blank."},
+           	presence: true,
            	length: { minimum: 8 }
 end

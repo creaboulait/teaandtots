@@ -14,3 +14,29 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+// make available the list of locations in dropdown
+// document.addEventListener("DOMContentLoaded", function(event){
+// 	$("#filter").on("keyup", function(e){
+// 		e.preventDefault();
+
+// 		$.ajax({
+// 		url: "playdates/search",
+// 	   	type: "POST",
+// 	   	data: $(this).serialize(),
+// 	   	dataType: "json",
+// 	   	success: function(data) {
+	   		
+// 	   		let locations = document.getElementById("dropdown")
+// 	   		locations.innerHTML = ""
+
+// 	   		data.forEach(function(playdate){	
+// 	   			let option = document.createElement("option")
+// 	   			option.value = playdate.location
+// 	   			locations.append(option)
+// 	   		})
+// 	   	}
+// 		})
+// 	})
+// });
+// end

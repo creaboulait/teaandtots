@@ -33,7 +33,7 @@
 								<div class="card-body">
 									<p class="card-text"><%= playdate.description %> </p>
 									<p class="card-text">Location: <%= playdate.location %></p>
-									<% if playdate.user_id == current_user.id || current_user.role == "admin" %>
+									<% if logged_in? && (playdate.user_id == current_user.id || current_user.role == "admin") %>
 										<p class="card-text">Address: <%= playdate.address %></p>
 									<% else %>
 										<p class="card-text text-danger">As a security measure, addresses will be shown to playdates participants only.</p>

@@ -16,12 +16,12 @@
 
 
 
+<% if Playdate.count != nil %>
 <div class="container-fluid pt-4">
   <div class="container">
     <h1 class="text-center text-white">Latest Playdates</h1>
     <h5 class="text-center text-white">Want to see more? <%= link_to "See all Playdates", playdates_path %></h5><br/>
     <div class="row">
-    <% if Playdate.count != nil %>
     <% Playdate.all.order(created_at: :desc).limit(3).each do |playdate| %>
         <div class="col-md-4 mb-4">
           <div class="card card-shadow text-center">
@@ -42,8 +42,8 @@
           </div>
         </div>
     <% end %>
-    <% end %>
     </div>
   </div>
 </div>
+<% end %>
 </header>

@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'byebug'
 
 RSpec.describe User, type: :model do
 	let(:proper_email)		{ 'hello@hello.com' }

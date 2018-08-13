@@ -16,8 +16,9 @@
 </div>
 <!-- Search bar ends -->
 
-<h5 class="text-center">Didn't like anything you see? <%= link_to "Create your own playdate!", new_playdate_path %></h5><br/>
-
+<% if logged_in? %>
+	<h5 class="text-center">Didn't like anything you see? <%= link_to "Create your own playdate!", new_playdate_path %></h5><br/>
+<% end %>
 
 <div id ="feed-content" class="container-fluid pt-4">
 	<div class="container">

@@ -25,7 +25,7 @@ class PlaydatesController < ApplicationController
 			flash[:success] = 'Your playdate has been created.'
 			redirect_to user_path(@playdate.user_id)
 		else
-			flash[:danger] = 'Please retry.'
+			flash[:danger] = @playdate.errors.full_messages.to_sentence
 			render :new
 		end
 	end

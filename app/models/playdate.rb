@@ -10,12 +10,12 @@ class Playdate < ApplicationRecord
 	validates :location, presence: true
 	validates :address, presence: true
 	validates :datetime, presence: true
-	# validates :start_time_in_the_past
+	validate :start_time_in_the_past
 
 	private
 	def start_time_in_the_past
-    if datetime < Time.now
-    errors.add(:datetime, "date & time cannot be in the past") 
+    if !self.datetime.blank? && self.datetime < Time.now
+    	errors.add(:datetime, "cannot be in the past") 
     end 
   end
 end

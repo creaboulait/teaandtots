@@ -1,6 +1,11 @@
-<div class="sign-in">
-  <h2>Sign In</h2>
-  
-  	<%= render partial: '/sessions/form' %>
+<h2 class="text-center my-2">Sign In!</h2>
+	<div class="container-fluid">
+		<div class="sign-up container">
+	  
+	  	<%= render partial: '/sessions/form' %>
 
-</div>
+		<div class="my-1">
+		  <%= link_to "Back", root_path, class: "btn btn-block btn-outline-dark" %>
+		</div><br/>
+		</div>
+	</div>

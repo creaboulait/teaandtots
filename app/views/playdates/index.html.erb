@@ -1,3 +1,9 @@
+<div>
+	<% if Forecast.count != nil %>
+	  <h4>Today's weather forecast: <%= Forecast.first.get_weather_data.currently.summary %>, with temperature <%= Forecast.first.get_weather_data.currently.temperature %>&deg;F. It's a good day for playdates!</h4><br/>
+	<% end %>
+</div>
+
 <h2 class="text-center my-3">Playdates</h2>
 
 <div class="container text-center">
@@ -44,8 +50,10 @@
 									<p class="card-text">Organized by: <%= link_to "#{playdate.user.first_name}", user_path(playdate.user_id) %></p>
 									<% if current_user == nil %>
 										<%= link_to 'Join this Playdate!', sign_up_path, :role => "button", :class => "btn btn-block btn-lg btn-outline-dark"  %>
-									<% else %>
+									<% elsif playdate.user_id != current_user.id %>
 										<%= link_to 'Join this Playdate!', new_playdate_participation_path(playdate.id), :role => "button", :class => "btn btn-block btn-lg btn-outline-dark"  %>
+									<% elsif playdate.user_id == current_user.id %>
+										<p>This playdate is hosted by you.</p>
 									<% end %>
 								</div>
 							</div>

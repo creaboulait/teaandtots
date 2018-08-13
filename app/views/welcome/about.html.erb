@@ -2,11 +2,10 @@
 
 <div class= "text-center">
   <h5>Admit it, that's why you're here too!</h5>
+
+  <h6>Ok, just kidding. I'm sure you are all good parents.</h6><br/>
+  <h6>This webapp is created to allow parents to schedule and manage playdates.</h6>
 </div>
 
-<div>
-	<% if Forecast.count != nil %>
-	  <h4>Today's weather forecast: <%= Forecast.first.get_weather_data.currently.summary %>, with temperature <%= Forecast.first.get_weather_data.currently.temperature %>&deg;F</h4><br/>
-	<% end %>
-</div>
+
 

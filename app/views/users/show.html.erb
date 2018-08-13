@@ -30,7 +30,7 @@
 <!-- Display own kids under user profile -->
 <div class="container-fluid pt-4">
 	<div class="container">
-		<% if @user.role == "admin" %>
+		<% if current_user.role == "admin" %>
 			<p class="text-center"><%= link_to "Switch to Admins Page", admins_path, :role => "button", :class => "btn-dark btn-lg" %><p></br>
 		<% end %>
 		<h4 class="text-center">Playdates organized by <%= @user.first_name %>:</h4><br/>

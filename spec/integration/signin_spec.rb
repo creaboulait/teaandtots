@@ -28,4 +28,14 @@ feature "User sign in" do
     click_button 'Sign In'
     expect(current_path).to eq(user_path(other_user))
   end
+
+  scenario "Signing in with wrong password" do
+    visit '/sign_in'
+    
+      fill_in 'Email', with: other_user.email
+      fill_in 'Password', with: 'poiuytre'
+   
+    click_button 'Sign In'
+    expect(current_path).to eq(sign_in_path)
+  end
 end

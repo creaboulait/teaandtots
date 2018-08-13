@@ -55,8 +55,8 @@ RSpec.describe User, type: :model do
 
 		it "should destroy playdates in DB if user is destroyed" do
 			user = User.create(email: proper_email, password: proper_password)
-			play_one = Playdate.create(title: "one", description: "one", location: "one", address: "one", datetime: Time.now, user: user)
-			play_two = Playdate.create(title: "two", description: "two", location: "two", address: "two", datetime: Time.now, user: user)
+			play_one = Playdate.create(title: "one", description: "one", location: "one", address: "one", datetime: Time.now + 2, user: user)
+			play_two = Playdate.create(title: "two", description: "two", location: "two", address: "two", datetime: Time.now + 2, user: user)
 			expect { user.destroy }.to change { Playdate.count }.by(-2)
 		end
 

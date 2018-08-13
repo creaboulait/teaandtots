@@ -49,6 +49,7 @@ class UsersController < ApplicationController
 
 	#This is confined to admin only & button available on admin panel
 	def unreport
+		@user.unreport!
 		redirect_to admins_path
 	end
 

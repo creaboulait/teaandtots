@@ -1,31 +1,41 @@
-<%= form_for @playdate do |form| %>
-	<div class="text-field">
-	  <%= form.label :title %>
-	  <%= form.text_field :title, :required => "true", :autocomplete => "off" %>
+<div class="container-fluid">
+  <div class="container">
+    <div class="title">
+      <h2>Create Playdate</h2>
+    </div>
+		<%= form_for @playdate do |form| %>
+			<div class="text-field">
+			  <%= form.label :title %>
+			  <%= form.text_field :title, :required => "true", :autocomplete => "off" %>
+			</div>
+
+			<div class="text-field">
+			  <%= form.label :description %>
+			  <%= form.text_field :description, :required => "true", :autocomplete => "off" %>
+			</div>
+
+			<div class="text-field">
+			  <%= form.label :location %>
+			  <%= form.text_field :location, :required => "true", :autocomplete => "off" %>
+			</div>
+
+			<div class="text-field">
+			  <%= form.label :address %>
+			  <%= form.text_field :address, :required => "true", :autocomplete => "off" %>
+			</div>
+
+			<div class="text-field">
+			  <%= form.label :datetime %>
+			  <%= form.datetime_field :datetime, :required => "true", :autocomplete => "off" %>
+			</div><br/>
+
+			<div class="submit-field my-1">
+		    <%= form.submit "Create Playdate", :class => "btn btn-block btn-outline-dark" %>
+		  </div>
+		<% end %>
+		  <div>
+		    <%= link_to "Back", user_path(current_user), class: "btn btn-block btn-outline-dark" %>
+		  </div><br/>
 	</div>
-
-	<div class="text-field">
-	  <%= form.label :description %>
-	  <%= form.text_field :description, :required => "true", :autocomplete => "off" %>
-	</div>
-
-	<div class="text-field">
-	  <%= form.label :location %>
-	  <%= form.text_field :location, :required => "true", :autocomplete => "off" %>
-	</div>
-
-	<div class="text-field">
-	  <%= form.label :address %>
-	  <%= form.text_field :address, :required => "true", :autocomplete => "off" %>
-	</div>
-
-	<div class="text-field">
-	  <%= form.label :datetime %>
-	  <%= form.datetime_field :datetime, :required => "true", :autocomplete => "off" %>
-	</div><br/>
-
-	<div class="submit-field">
-    <%= form.submit "Create Playdate", :class => "btn btn-block btn-outline-dark" %>
-  </div>
-<% end %>
+</div>
 

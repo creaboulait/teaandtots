@@ -13,7 +13,7 @@
  *= require_tree .
  *= require_self
  */
- @import 'reviews';
+
 
 #founders-story-header {
     background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url("https://images.pexels.com/photos/160946/people-children-child-happy-160946.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350");
@@ -28,6 +28,64 @@
 
 #header-article {
  	margin-top: 60px;
+}
+
+.rating {
+  margin: 10px 0;
+  display: flex;
+  left: 50%;
+  transform: translate(-22%, 0) rotateY(180deg);
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  display: block;
+  cursor: pointer;
+  width: 50px;
+  margin: 0 5px;
+}
+
+.rating label:before {
+  content: "\f005";
+  font-family: "Font Awesome\ 5 Free";
+  position: relative;
+  display: block;
+  font-size: 30px;
+  color: #ccc;
+}
+
+.rating label:after {
+  content: "\f005";
+  font-family: "Font Awesome\ 5 Free";
+  position: absolute;
+  display: block;
+  font-size: 30px;
+  color: rgba(247, 236, 78, 0.9);
+  top: 0;
+  opacity: 0;
+  transition: .5s;
+  text-shadow: 0 2px 5px rgba(5, 99, 116, 0.5);
+}
+
+.rating label:hover:after,
+.rating label:hover ~ label:after,
+.rating input:checked ~ label:after {
+  opacity: 1;
+}
+
+.grey-star {
+  color: #ccc;
+}
+
+.star-color {
+  color: rgba(247, 236, 78, 0.9);
+}
+
+.grey-star, .star-color {
+  font-size: 24px;
 }
 
 

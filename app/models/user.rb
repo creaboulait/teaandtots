@@ -19,4 +19,9 @@ class User < ApplicationRecord
   		update_attribute(:reported, true)
  	end
 
+ 	def unreport!
+ 		update_attribute(:reported, false)
+ 		update_attribute(:reported_by_user_id, nil)
+ 	end
+
 end

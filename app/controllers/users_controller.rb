@@ -49,7 +49,6 @@ class UsersController < ApplicationController
 
 	#This is confined to admin only & button available on admin panel
 	def unreport
-		@user.update(reported: false, reported_by_user_id: nil)
 		redirect_to admins_path
 	end
 

@@ -70,4 +70,13 @@ RSpec.describe User, type: :model do
 		end
 	end
 
+	context 'test unreport! model method' do
+		it "should change the column reported value from true to false & reported_by_user_id to be nil" do
+			user = User.create(email: proper_email, password: proper_password)
+			user.unreport!
+			expect(user.reported).to eq(false)
+			expect(user.reported_by_user_id).to eq(nil)
+		end
+	end
+
 end
